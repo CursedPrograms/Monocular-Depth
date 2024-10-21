@@ -14,9 +14,9 @@ def main():
 
     scripts = {
         "1": {
-            "name": "Run 'Script00'",
+            "name": "Run 'Monocular Depth'",
             "description": "This is Script01",
-            "file_name": "scripts/script00.py"
+            "file_name": "scripts/monocular_depth.py"
         },
         "2": {
             "name": "Run 'Script01",

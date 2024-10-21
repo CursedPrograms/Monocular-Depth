@@ -1,6 +1,6 @@
 {
     "Config": {
-      "AppName": "TemplateProject",
+      "AppName": "Monocular Depth",
       "Description": "",
       "ProjectStructure": {
         "MainScript": "main.py",

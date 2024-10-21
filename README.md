@@ -39,8 +39,7 @@ pip install -r requirements.txt
 Or run: 
 - `install_requirements.bat`
 
-  
-  <br>
+<br>
 
 ### Run main.py
 
@@ -62,11 +61,9 @@ Unix-like systems (Linux/macOS):
 
 <br>
 
-# CPP-Template
+## Make Executables
 
 https://sourceforge.net/projects/mingw/
-
-## Make Executables
 
 ### Make an EXE
 
@@ -74,7 +71,8 @@ https://sourceforge.net/projects/mingw/
 g++ main.cpp -o main.exe
 ```
 
-or Run: exemake.bat
+or Run:
+- `.\exemake.bat`
 
 ### Make a DLL
 
@@ -82,9 +80,11 @@ or Run: exemake.bat
 g++ main.cpp -o main.dll
 ```
 
-or Run: dllmake.bat
+or Run: 
+- `.\dllmake.bat`
 
-Run: runmain.bat
+Run: 
+- `.\runmain.bat`
 
 <br>
 <div align="center">

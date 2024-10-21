@@ -1,13 +1,11 @@
 {
-    "Config": {
-      "AppName": "Monocular Depth",
-      "Description": "",
-      "ProjectStructure": {
-        "MainScript": "main.py",
-        "DependenciesScript": "scripts/install-dependencies.py"
-      },
-      "Scripts": {
-
-      }
-    }
+  "Config": {
+    "AppName": "Monocular Depth",
+    "Description": "",
+    "ProjectStructure": {
+      "MainScript": "main.py",
+      "DependenciesScript": "scripts/install-dependencies.py"
+    },
+    "Scripts": {}
   }
+}

@@ -60,9 +60,9 @@ or
 Unix-like systems (Linux/macOS):
 - `.\run.sh`
 
-  <br>
+<br>
 
-  # CPP-Template
+# CPP-Template
 
 https://sourceforge.net/projects/mingw/
 

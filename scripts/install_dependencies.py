@@ -1,4 +1,5 @@
 import subprocess
+import sys
 
 def install_dependencies():
     try:
@@ -10,7 +11,7 @@ def install_dependencies():
         for requirement in requirements:
             requirement = requirement.strip()
             if requirement:
-                subprocess.run(['pip', 'install', requirement])
+                subprocess.run([sys.executable, '-m', 'pip', 'install', requirement])
 
         print("Dependencies installed successfully.")
 

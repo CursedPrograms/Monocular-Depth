@@ -3,6 +3,7 @@
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
 #include <opencv2/dnn/all_layers.hpp>
+#include <opencv2/core/cuda.hpp>
 #include <vector>
 
 using namespace std;
@@ -30,7 +31,8 @@ vector<string> getOutputsNames(const cv::dnn::Net& net)
 
 int main(int, char**) {
 
-    string file_path = "C:/Users/nhoei/ComputerVision/OpenCVCuda/models/";
+    // Models folder, relative to the working directory (run from the repo root)
+    string file_path = "models/";
 
     // Read Network
     //string model = "model-f6b98070.onnx"; // MiDaS v2.1 Large
@@ -43,11 +45,20 @@ int main(int, char**) {
 
     if (net.empty())
     {
+        cout << "Could not load " << file_path + model << " - see README.md" << endl;
         return -1;
     }
-    // Run on either CPU or GPU
-    net.setPreferableBackend(DNN_BACKEND_CUDA);
-    net.setPreferableTarget(DNN_TARGET_CUDA);
+    // Run on the GPU when OpenCV was built with CUDA, otherwise the CPU
+    if (cv::cuda::getCudaEnabledDeviceCount() > 0) {
+        cout << "Using CUDA" << endl;
+        net.setPreferableBackend(DNN_BACKEND_CUDA);
+        net.setPreferableTarget(DNN_TARGET_CUDA);
+    }
+    else {
+        cout << "Using CPU" << endl;
+        net.setPreferableBackend(DNN_BACKEND_OPENCV);
+        net.setPreferableTarget(DNN_TARGET_CPU);
+    }
 
     // Open up the webcam
     VideoCapture cap(0);

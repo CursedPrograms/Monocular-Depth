@@ -1,14 +1,17 @@
-# Use the official Windows Server Core as the base image
-FROM mcr.microsoft.com/windows/servercore:ltsc2022
+# Linux image for the Python app.
+# The webcam and the OpenCV windows need host access, e.g. on Linux:
+#   docker build -t monocular-depth .
+#   docker run -it --device /dev/video0 -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v "$(pwd)/models:/app/models" monocular-depth
+FROM python:3.11-slim
 
-# Set the working directory
+# Libraries opencv-python needs for its GUI windows
+RUN apt-get update && apt-get install -y --no-install-recommends libgl1 libglib2.0-0 && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Copy the application files from the host to the container
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
 COPY . .
 
-# Install any necessary dependencies (example: PowerShell modules or other tools)
-# RUN powershell -Command Install-Package -Name <package_name>
-
-# Specify the command to run your application
-CMD ["powershell.exe", "-File", "your-script.ps1"]
+CMD ["python", "scripts/monocular_depth.py"]

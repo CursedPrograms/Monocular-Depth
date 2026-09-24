@@ -1,9 +1,12 @@
 import os
+import sys
 import subprocess
 import json
 
 def main():
-    with open('config.json') as json_file:
+    current_script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    with open(os.path.join(current_script_dir, 'config.json')) as json_file:
         config_data = json.load(json_file)
 
     # Get the project name from the JSON data
@@ -15,13 +18,8 @@ def main():
     scripts = {
         "1": {
             "name": "Run 'Monocular Depth'",
-            "description": "This is Script01",
+            "description": "Webcam depth map using MiDaS v2.1",
             "file_name": "scripts/monocular_depth.py"
-        },
-        "2": {
-            "name": "Run 'Script01",
-            "description": "This is Script01",
-            "file_name": "scripts/script01.py"
         },
         "00": {
             "name": "Run 'install_dependencies.py'",
@@ -29,8 +27,6 @@ def main():
             "file_name": "scripts/install_dependencies.py"
         },
     }
-
-    current_script_dir = os.path.dirname(os.path.abspath(__file__))
 
     while True:
         print("\nAvailable Scripts:")
@@ -49,7 +45,7 @@ def main():
             
             if os.path.exists(script_file_path):
                 try:
-                    subprocess.run(["python", script_file_path])
+                    subprocess.run([sys.executable, script_file_path], cwd=current_script_dir)
                 except Exception as e:
                     print(f"An error occurred while running the script: {e}")
             else:

@@ -1,10 +1,10 @@
 {
   "Config": {
     "AppName": "Monocular Depth",
-    "Description": "",
+    "Description": "Real-time monocular depth estimation from a webcam using MiDaS v2.1 and OpenCV DNN",
     "ProjectStructure": {
       "MainScript": "main.py",
-      "DependenciesScript": "scripts/install-dependencies.py"
+      "DependenciesScript": "scripts/install_dependencies.py"
     },
     "Scripts": {}
   }

@@ -3,6 +3,7 @@ import sys
 import time
 
 import cv2
+import numpy as np
 
 
 # Models live in <repo>/models, regardless of the working directory
@@ -68,6 +69,8 @@ while cap.isOpened():
     # MiDaS v2.1 ( Scale : 1 / 255, Size : 384 x 384 (Large) / 256 x 256 (Small), Mean Subtraction : ( 123.675, 116.28, 103.53 ), Channels Order : RGB )
     # swapRB=True converts the BGR webcam frame to RGB
     blob = cv2.dnn.blobFromImage(img, 1/255., (input_size, input_size), (123.675, 116.28, 103.53), True, False)
+    # MiDaS also divides by the ImageNet std; blobFromImage only subtracts the mean
+    blob /= np.array([0.229, 0.224, 0.225], np.float32).reshape(1, 3, 1, 1)
 
     # Set input to the model
     model.setInput(blob)

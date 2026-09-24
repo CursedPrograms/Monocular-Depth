@@ -89,6 +89,13 @@ int main(int, char**) {
         // MiDaS v2.1 Small ( Scale : 1 / 255, Size : 256 x 256, Mean Subtraction : ( 123.675, 116.28, 103.53 ), Channels Order : RGB )
         Mat blob = blobFromImage(image, 1 / 255.f, cv::Size(256, 256), cv::Scalar(123.675, 116.28, 103.53), true, false);
 
+        // MiDaS also divides by the ImageNet std; blobFromImage only subtracts the mean
+        const float stddev[3] = { 0.229f, 0.224f, 0.225f };
+        for (int c = 0; c < 3; ++c) {
+            Mat plane(blob.size[2], blob.size[3], CV_32F, blob.ptr<float>(0, c));
+            plane /= stddev[c];
+        }
+
         // Set the blob to be input to the neural network
         net.setInput(blob);
 
